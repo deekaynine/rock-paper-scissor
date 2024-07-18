@@ -62,7 +62,7 @@ function playRound(humanChoice, computerChoice){
     } else if (playerChoice === 'rock' && cpuChoice === 'paper'){
         cpuScore++;
         resultsContainer.textContent ='You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore
-    } else if(playerChoice === 'pper' && cpuChoice === 'rock'){
+    } else if(playerChoice === 'paper' && cpuChoice === 'rock'){
         playerScore++;
         resultsContainer.textContent ='You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore
     } else if (playerChoice === 'paper' && cpuChoice === 'scissor'){
