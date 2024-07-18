@@ -4,24 +4,53 @@
 // Compare results and keep track of score and store score values in variables
 // Create a function to start the game
 
+//
+
 
 let choices = ['rock', 'paper', 'scissor']
 let playerScore = 0;
 let cpuScore = 0;
+let humanChoice = ""
+let cpuChoice = ""
 
-function getUserInput(){
-    let userInput = prompt("Enter rock, paper or scissor: ").toLowerCase();
-    console.log(userInput)
-    return userInput
-}
+let buttonsContainer = document.querySelector(".buttons-container")
+let resultsContainer = document.querySelector(".results")
+
+let rockButton = document.createElement('button')
+rockButton.setAttribute('value', choices[0])
+rockButton.textContent = "rock"
+console.log(rockButton)
+let paperButton = document.createElement('button')
+paperButton.setAttribute('value', choices[1])
+paperButton.textContent = "paper"
+let scissorButton = document.createElement('button')
+scissorButton.setAttribute('value', choices[2])
+scissorButton.textContent = "scissor"
+
+buttonsContainer.appendChild(rockButton)
+buttonsContainer.appendChild(paperButton)
+buttonsContainer.appendChild(scissorButton)
+
+let buttons = document.querySelectorAll("button")
+
+buttons.forEach((button)=>{
+    button.addEventListener("click", (e)=>{
+        humanChoice = e.target.value
+        console.log(humanChoice)
+        cpuChoice = getCpuInput()
+        playRound(humanChoice,cpuChoice)
+    })
+})
+
+
+
+
+
 
 function getCpuInput(){
     let cpuInput = choices[Math.floor(Math.random() * choices.length)].toLowerCase()
-    console.log(cpuInput)
-    return cpuInput
+    return cpuInput;
 }
-
-
 
 function playRound(humanChoice, computerChoice){
     let playerChoice = humanChoice
@@ -29,41 +58,27 @@ function playRound(humanChoice, computerChoice){
     
     if(playerChoice === 'rock' && cpuChoice === 'scissor'){
         playerScore++;
-        console.log('You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore)
+        resultsContainer.textContent = 'You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore
     } else if (playerChoice === 'rock' && cpuChoice === 'paper'){
         cpuScore++;
-        console.log('You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore)
+        resultsContainer.textContent ='You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore
     } else if(playerChoice === 'paper' && cpuChoice === 'rock'){
         playerScore++;
-        console.log('You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore)
+        resultsContainer.textContent ='You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore
     } else if (playerChoice === 'paper' && cpuChoice === 'scissor'){
         cpuScore++;
-        console.log('You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore)
+        resultsContainer.textContent ='You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore
     } else if(playerChoice === 'scissor' && cpuChoice === 'paper'){
         playerScore++;
-        console.log('You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore)
+        resultsContainer.textContent ='You win! Your score is: ' + playerScore + 'CPU score is:' + cpuScore
     } else if (playerChoice === 'scissor' && cpuChoice === 'rock'){
         cpuScore++;
-        console.log('You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore)
+        resultsContainer.textContent ='You lose. Your score is: ' + playerScore + 'CPU score is: ' + cpuScore
     } else {
-        console.log("It's a tie")
-        console.log(`Your score is ${playerScore} and CPU score is ${cpuScore}`)
+        resultsContainer.textContent =`It's a tie
+        Your score is ${playerScore} and CPU score is ${cpuScore}`
     }
 
 }
 
-function playGame(){
-    
-    
-    
 
-    for(let i=0;i<5;i++){
-    let humanChoice = getUserInput()
-    let cpuChoice = getCpuInput()
-    playRound(humanChoice,cpuChoice)
-    }
-
-    console.log(`Game is over.  Your score is ${playerScore} and CPU score is ${cpuScore}`)
-}
-
-playGame()
